@@ -10,11 +10,11 @@ function App() {
   const [ todos, setTodos ] = useState([]);
   const [ noneCompletedItemsCount, setNoneCompletedItemsCount ] = useState(0);
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-        .then( response => response.json())
-        .then(setTodos)
-  }, []);
+  // useEffect(() => {
+  //   fetch('https://jsonplaceholder.typicode.com/todos')
+  //       .then( response => response.json())
+  //       .then(setTodos)
+  // }, []);
 
   useEffect(() => {
       const uncompleted = todos.filter( todo => !todo.completed );
@@ -31,23 +31,23 @@ function App() {
   }
 
   const removeTodo = (todoToRemove) => {
-    todos = todos.filter( currentTodo => currentTodo.id !== todoToRemove.id );
-    console.log(todos);
+    const newTodos1 = todos.filter( currentTodo => currentTodo.id !== todoToRemove.id );
+    setTodos(newTodos1);
   }
 
   const markAsCompleted = () => {
-
+    
   }
 
   const clearAllCompletedItems = () => {
-    todos = todos.filter( currentTodo => !currentTodo.completed );
-    console.log(todos);
+    const newTodos2 = todos.filter( currentTodo => !currentTodo.completed );
+    setTodos(newTodos2);
   }
 
   const toggleAllItems = (checkedValue) => {
-    todos = todos.map( todo => ({ ...todo, completed: checkedValue }));
+    const newtodos3 = todos.map( todo => ({ ...todo, completed: checkedValue }));
     // todos = todos.map( todo => Object.assign({}, todo, {completed: checkedValue}));
-    console.log(todos);
+    setTodos(newtodos3);
   }
 
   return (
@@ -57,6 +57,8 @@ function App() {
                 text="What needs to be done?"  />
         <Main items={todos}
               onToggleAll={toggleAllItems}
+              destroy={removeTodo}
+              markAsCompleted={markAsCompleted}
         />
         <Footer
             itemLeftCount={noneCompletedItemsCount}

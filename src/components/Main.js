@@ -1,6 +1,6 @@
 import {TodosList} from "./TodosList";
 
-export function Main({ items, onToggleAll }) {
+export function Main({ items, onToggleAll, destroy, markAsCompleted }) {
 
   function handleToggleAll(event) {
     onToggleAll(event.target.checked);
@@ -11,7 +11,7 @@ export function Main({ items, onToggleAll }) {
         <input className="toggle-all"
                onChange={handleToggleAll}
                type="checkbox"/>
-        <TodosList items={items}/>
+        <TodosList items={items} removetodo={destroy} markAsCompleted={markAsCompleted}/>
       </section>
   );
 }
